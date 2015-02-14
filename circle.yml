@@ -10,3 +10,9 @@ test:
   override:
     - fig run -d --no-deps web
     - cd app; mocha
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - $DEPLOY
