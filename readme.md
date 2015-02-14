@@ -19,7 +19,8 @@ $ docker push mjhea0/node-docker-workflow
 
 ## PULL
 
-1. Created automated build on Docker Hub
+1. Uncheck active
+1. Create automated build on Docker Hub
 
 
 # CI
@@ -31,3 +32,4 @@ $ docker push mjhea0/node-docker-workflow
 
 1. Add build trigger
 1. Update circle.yml file
+1. Push to github, after tests pass, new build is triggered
