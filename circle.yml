@@ -1,0 +1,12 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - pip install fig
+
+test:
+  override:
+    - fig run -d --no-deps web
+    - mocha app/
