@@ -36,6 +36,14 @@ $ docker push mjhea0/node-docker-workflow
 
 # CD - part 2: deploy to digital ocean
 
+1. digital ocean setup
+1. pull
+1. install requirements
+1. fig build
+1. fig up -d
+
+# CD - part 2: deploy to digital ocean
+
 1. Push from docker hub after new build
 1. docker-hook-listener
 1. Profit
