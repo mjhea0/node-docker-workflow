@@ -9,5 +9,4 @@ dependencies:
 test:
   override:
     - fig run -d --no-deps web
-    - ls
     - cd app; mocha
