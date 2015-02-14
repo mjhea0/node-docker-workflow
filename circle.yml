@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   override:
-    - pip install fig
+    - pip install fig==1.0.0
 
 test:
   override:
