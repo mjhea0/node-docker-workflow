@@ -1,7 +1,7 @@
 # Local setup
 
 1. Install boot2docker
-1. Install fig - `brew install fig`
+1. Install fig - `pip install -r requirements.txt`
 1. Add application
 1. Dockerfile
 1. fig.yml
