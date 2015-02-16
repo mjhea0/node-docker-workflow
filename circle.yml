@@ -1,0 +1,18 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - pip install -r requirements.txt
+
+test:
+  override:
+    - fig run -d --no-deps web
+    - cd app; mocha
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - $DEPLOY
