@@ -1,5 +1,5 @@
 web:
-  build: .
+  build: ./app
   volumes:
     - "app:/src/app"
   ports:
@@ -7,6 +7,6 @@ web:
   links:
    - redis
 redis:
-    image: redis:2.8.19
+    build: ./redis
     ports:
         - "6379:6379"

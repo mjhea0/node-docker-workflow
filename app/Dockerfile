@@ -5,7 +5,7 @@ RUN mkdir /src
 RUN npm install nodemon -g
 
 WORKDIR /src
-ADD /app /src
+ADD . /src
 RUN npm install
 
 EXPOSE 3000
