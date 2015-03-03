@@ -4,6 +4,5 @@ node_modules
 _presentation
 blog.md
 circle.yml
-docker-compose.yml
 readme.md
 tutum.yml
