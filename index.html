@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Docker in Action - fitter, happier, more productive</title>
+    <title>Node With Docker - Continuous Integration and Delivery</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -34,22 +34,19 @@
     <body>
 
         <div class="reveal">
-
             <div class="slides"><section  data-markdown><script type="text/template">![docker logo](images/docker-logo.jpg)
 
 ### Fitter. Happier. More Productive.
 
 <hr>
 
-#### - Docker in Action -
-
-<aside class="notes" data-markdown>- play radiohead song
-- Alright, we have a lot of material to cover so let's dive right in.</aside></script></section><section ><section data-markdown><script type="text/template">
+Presented at the [NodeJS Denver/Boulder](http://www.meetup.com/Node-js-Denver-Boulder/)<br> Meetup group on March 5th, 2015.
+</script></section><section ><section data-markdown><script type="text/template">
 ## Joke
 
 <hr><br>
 
-### What did the hippie/yogi say when asked to get off the couch?
+### What did the hippie say when asked to get off the couch?
 </script></section><section data-markdown><script type="text/template">
 Namaste<br>(nah-I'm-a-stay)
 </script></section></section><section  data-markdown><script type="text/template">
@@ -62,19 +59,8 @@ Namaste<br>(nah-I'm-a-stay)
 
     ![real python logo](images/rp_logo_color_small.png)
 
-- Mentor/educator/teacher/blogger
+- Mentor/educator/teacher/blogger - [refactorU](http://www.refactoru.com/)
 - Bottom-line: *I don't sleep*.
-</script></section><section  data-markdown><script type="text/template">
-## Real Python
-
-<hr>
-
-- Learn programming and web development through hands-on, interesting examples that are useful and fun!
-
-- Three courses: basics, web development with Flask, and advanced web development with Django
-
-- Coupon Code (50% off): [FORPYTN](https://realpython.com/promo/)
-
 </script></section><section  data-markdown><script type="text/template">
 ## Today
 
@@ -101,7 +87,7 @@ Namaste<br>(nah-I'm-a-stay)
 <hr>
 
 1. Version control for infrastructure
-1. Easily distrubute/recreate your entire dev env
+1. Easily distribute/recreate your entire dev env
 1. Build once, run anywhere - aka The Holy Grail!
 
 ![holy grail](images/holy-grail.jpg)
@@ -131,32 +117,24 @@ Let's get Docker up and running!
 <br>
 
 Enter **Boot2Docker** - a *lightweigh*t Linux distribution designed specifically to run Docker ([Install](https://docs.docker.com/installation/mac/))
-
-<aside class="notes" data-markdown>Mac and Windows users need this in order to power Docker containers. Once installed, test it out - `boot2docker version`</aside></script></section><section data-markdown><script type="text/template">
-## Fig Up!
+</script></section><section data-markdown><script type="text/template">
+## Compose Up!
 
 <hr>
 
-![steps](images/fig.png)
+![docker compose](images/compose.png)
 
-- **[Fig](http://www.fig.sh/)** builds and run services needed for your application.
-- Install it via pip and then define the services within a *fig.yml* file.
-
-<aside class="notes" data-markdown>- Fig handles the building and running of multiple services. It makes it super easy to link services together running in different containers.
-- Once installed, test it out - `fig --version`
-- First, we build the image from the "web" directory and then mount that directory to the "code" directory within the Docker container. The Flask app is ran via the `python app.py` command. This exposes port 5000 on the container, which is forwarded to port 80 on the host environment.
-- Next, the Redis service is built from the Docker Hub "Redis". Port 6379 is exposed and fowarded.</aside></script></section><section data-markdown><script type="text/template">
+- **[Docker Compose](https://github.com/docker/compose)** builds and runs services needed for your application's tech stack.
+- Install and then define the services within a *docker-compose.yml* file.
+</script></section><section data-markdown><script type="text/template">
 ## Build and Run
 
 <hr><br>
 
-### `$ fig up`
+### `$ docker-compose up`
 
 ![fig logo](images/figup.png)
-
-<aside class="notes" data-markdown>- This command builds an image for our Flask app, pulls the Redis image, and then starts everything up.
-- Now we can view our app in the browser by navigating to the address associated with the boot2docker VM - `boot2docker ip`.
-- At this point we've set up our local environent. Next, let's add CI into the mix.</aside></script></section></section><section ><section data-markdown><script type="text/template">
+</script></section></section><section ><section data-markdown><script type="text/template">
 # Part 2 - Continuous Integration
 </script></section><section data-markdown><script type="text/template">
 ## Docker Hub
@@ -165,10 +143,7 @@ Enter **Boot2Docker** - a *lightweigh*t Linux distribution designed specifically
 
 - [Docker Hub](https://hub.docker.com/) is a repository of Docker images.
 - It acts as a CI server since you can configure it to create a build every time you push a new commit to Github.
-
-<aside class="notes" data-markdown>- Docker Hub is like Github, only for Docker images
-- CI: Let's test this out. I'll add a simple assertion to the test, commit, and push. This will generate a new build on Docker Hub - which should be successful.
-- That said, we should use a *true* CI server to catch errors before we generate any builds on Docker Hub.</aside></script></section><section data-markdown><script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 ## CircleCI
 
 <hr>
@@ -178,10 +153,7 @@ Enter **Boot2Docker** - a *lightweigh*t Linux distribution designed specifically
 - **[CircleCI](https://circleci.com/)** is a continuous integration and delivery platform that supports testing within Docker containers.
 - [Getting started with CircleCI](https://circleci.com/docs/getting-started) - super simple setup
 - Add a *circle.yml* config file
-
-<aside class="notes" data-markdown>- Given a Dockerfile, CircleCI builds an image, starts a new container, and then runs tests inside that container.
-- Sign up with your Github account, then add the Github repo to create a new project. This will automatically add a webhook to the repo so that anytime you push to Github a new build is triggered.
-- Essentially, we create a new image, run the container, then test - first that the web process is running (the app is live) and then that our unit tests pass.</aside></script></section><section data-markdown><script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 ## Feature Branch Workflow
 
 <hr>
@@ -194,54 +166,97 @@ Example...
 1. Manually merge once the tests pass
 1. The tests run again on the master branch
 1. Once the second round passes, a new build is triggered on Docker Hub
+</script></section></section><section ><section data-markdown><script type="text/template">
+# Part 3 - Continuous Delivery
+</script></section><section data-markdown><script type="text/template">
+## Tutum
 
-<aside class="notes" data-markdown>- Before you go through this process, you need to configure Docker Hub to only create a new build after Circle CI runs the tests on the master branch - and they are successful. This is detailed in the blog post.
-- `git checkout -b circle-test master`
-- `self.assertNotEqual(four, 6)`
-- `git push origin circle-test`
-- Create PR
-- Merge
-- Check for new build</aside></script></section></section><section  data-markdown><script type="text/template">
+<hr>
 
-## Conclusion
+![tutum logo](images/tutum.jpg)
+
+- [Tutum](https://www.tutum.co/) manages the orchestration and deployment of Docker images and containers.
+- This service is used for the actual delivery of our app to Digital Ocean.
+</script></section><section data-markdown><script type="text/template">
+## Tutum (setup)
+
+<hr>
+
+1. Sign up
+1. Link your Digital Ocean Account
+1. Add a Node
+1. Add a stack
+1. Add web hook
+1. Profit
+</script></section><section data-markdown><script type="text/template">
+## Feature Branch Workflow (redux)
+
+<hr>
+
+1. Create the branch
+1. Make changes locally
+1. Issue a Pull request
+1. Manually merge once the tests pass
+1. The tests run again on the master branch
+1. Once the second round passes, a new build is triggered on Docker Hub
+1. After the build is triggered, a post request is sent to Tutum, which redeploys the app.
+</script></section></section><section  data-markdown><script type="text/template">
+
+# Conclusion
 
 <hr>
 
 - So, we went over a nice development workflow that included setting up a local environment coupled with continuous integration.
-- What about the final piece - deliverying this app to the production environment? Make sure to check out the blog post @ [realpython.com](https://realpython.com) on 02/10/2015!
-- michael@realpython.com
+- **michael@realpython.com**
 
-![heart](images/heart.jpg)
+<br>
 
----</script></section></div>
+Cheers!
+</script></section><section  data-markdown><script type="text/template"></script></section></div>
         </div>
 
-    <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.js"></script>
+        <script src="/lib/js/head.min.js"></script>
+        <script src="/js/reveal.js"></script>
 
-    <script>
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
 
-      // Full list of configuration options available at:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-        center: true,
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: '/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: '/plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: '/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: '/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: '/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ];
 
-        transition: 'slide', // none/fade/slide/convex/concave/zoom
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
 
-        // Optional reveal.js plugins
-        dependencies: [
-          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: 'plugin/zoom-js/zoom.js', async: true },
-          { src: 'plugin/notes/notes.js', async: true }
-        ]
-      });
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
 
-    </script>
+            var options = {};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+        </script>
     </body>
 </html>
