@@ -1,4 +1,4 @@
-FROM dockerfile/nodejs
+FROM node:latest
 
 RUN mkdir /src
 
