@@ -8,7 +8,7 @@ dependencies:
 
 test:
   override:
-    - docker-compose
+    - docker-compose up
     - cd app; mocha
 
 deployment:
