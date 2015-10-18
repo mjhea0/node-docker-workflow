@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   override:
-    - sudo pip install --upgrade docker-compose
+    - sudo pip install --upgrade docker-compose==1.3.3
 
 test:
   override:
