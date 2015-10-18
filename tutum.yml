@@ -1,0 +1,12 @@
+web:
+  image: mjhea0/node-docker-workflow
+  autorestart: always
+  ports:
+    - "80:3000"
+  links:
+   - "redis:redis"
+redis:
+    image: redis
+    autorestart: always
+    ports:
+        - "6379:6379"
